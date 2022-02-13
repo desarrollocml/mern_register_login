@@ -15,7 +15,7 @@ app.use(cors());
 
 //routes
 app.use("/api/users", userRoutes);
-app.use("./api/auth");
+app.use("./api/auth", authRoutes);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Escuchando puerto ${port}`));
