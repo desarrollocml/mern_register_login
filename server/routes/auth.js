@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
     const { error } = validate(req.body);
     if (error)
       return res.status(400).send({ message: error.details[0].message });
+      
     const user = await User.findOne({ email: req.body.email });
     if (!user)
       return res.status(401).send({ message: "Email o Password incorrecto" });
@@ -20,7 +21,7 @@ router.post("/", async (req, res) => {
       return res.status(401).send({ message: "Email o Password incorrecto" });
 
     const token = user.generateAuthToken();
-    res.status(200).send({ message: "Ingreso exitoso" });
+    res.status(200).send({ data: token, message: "Ingreso exitoso" });
   } catch (error) {
     res.status(500).send({ message: "Error de servidor interno" });
   }
